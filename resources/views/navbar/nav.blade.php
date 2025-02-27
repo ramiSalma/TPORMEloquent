@@ -11,13 +11,12 @@
             @method('DELETE')
             <button type="submit" class="btn btn-danger mx-3"  onclick="return confirm('Are you sure you want to delete all stagiaires?');">delete all</button>
         </form>
-        <form action="" method="post">
+        <form action="{{ route('stagiaires.index') }}" method="get">
             @csrf
-            <input class="bg-dark mx-3 border-2 border-warning py-2 text-white" name="nom" placeholder="search by id" type="text">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search stagiaire..."
+             class="bg-dark mx-3 border-2 border-warning py-2 text-white" >
             <button class="btn btn-success " type="submit">search</button>
         </form>
-
-        
 
     </div>
     

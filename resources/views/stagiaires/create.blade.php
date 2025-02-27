@@ -31,13 +31,13 @@
                    <label  class="text-warning my-2" for="">age: </label>
                    <input type="age" class="form-control bg-black border border-2 border-success text-success" name="age" id="age"  placeholder="">
                </div>
-               {{--  <div class="form-group my-3">
+               <div class="form-group my-3">
                    <label  class="text-warning my-2" for="">email: </label>
                    <input type="email" class="form-control bg-black border border-2 border-success text-success" name="email" id="email"  placeholder="">
                </div>
                    <label  class="text-warning my-2" for="">password: </label>
-                   <input type="password"" class="form-control bg-black border border-2 border-success text-success name="password" id="password"  placeholder="">
-                </div>  --}}
+                   <input type="password" class="form-control bg-black border border-2 border-success text-success" name="password" id="password"  placeholder="">
+                </div>
                 <button type="submit" class="btn btn-warning my-3"> ajouter un stagiaire</button>
            </form>
        </div>

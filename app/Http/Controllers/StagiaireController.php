@@ -14,7 +14,11 @@ class StagiaireController extends Controller
     {
         //$nom = $request->input('nom');
         //$stagiaires = Stagiaire::where('nom','like',"$nom")->get();
-        $stagiaires = Stagiaire::paginate(10);
+        //$stagiaires = Stagiaire::paginate(10);
+        $search = $request->input('search');
+        $stagiaires = Stagiaire::when($search, function ($query, $search) {
+            return $query->where('nom', 'like', "%$search%");
+        })->paginate(10);
         return view('stagiaires.index', compact('stagiaires'));
     }
 
@@ -33,7 +37,7 @@ class StagiaireController extends Controller
     {
         $input = $request->all();
         stagiaire::create($input);
-        return redirect('stagiaires.index')->with('success','stagiaire added');
+        return redirect('/stagiaires')->with('success','stagiaire added');
     }
 
     /**
@@ -78,6 +82,6 @@ class StagiaireController extends Controller
     {
         Stagiaire::truncate();
 
-        return redirect()->route('/s')->with('success', 'All stagiaires have been deleted.');
+        return redirect()->route('/stagiaires')->with('success', 'All stagiaires have been deleted.');
     }
 }
