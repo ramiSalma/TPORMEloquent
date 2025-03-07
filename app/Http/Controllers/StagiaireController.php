@@ -15,11 +15,20 @@ class StagiaireController extends Controller
         //$nom = $request->input('nom');
         //$stagiaires = Stagiaire::where('nom','like',"$nom")->get();
         //$stagiaires = Stagiaire::paginate(10);
-        $search = $request->input('search');
-        $stagiaires = Stagiaire::when($search, function ($query, $search) {
-            return $query->where('nom', 'like', "%$search%");
-        })->paginate(10);
-        return view('stagiaires.index', compact('stagiaires'));
+        // $search = $request->input('search');
+        // $stagiaires = Stagiaire::when($search, function ($query, $search) {
+        //     return $query->where('nom', 'like', "%$search%");
+        // })->paginate(10);
+
+
+        //$stagiaires = Stagiaire::all();
+        //$stagiaires = Stagiaire::orderBy('age','asc')->paginate(10);
+        //$stagiaires = Stagiaire::orderBy('name','asc')->limit(5)->get();
+        $total = Stagiaire::count();
+        $moyAge = stagiaire::avg('age');
+        $stagiaires = stagiaire::all()->where('age','=',20);
+        $stagiaire = stagiaire::where('age','>',20);
+        return view('stagiaires.index', compact('stagiaires','total','moyAge','stagiaire'));
     }
 
     /**
@@ -35,8 +44,12 @@ class StagiaireController extends Controller
      */
     public function store(Request $request)
     {
+       
         $input = $request->all();
         stagiaire::create($input);
+        
+        
+
         return redirect('/stagiaires')->with('success','stagiaire added');
     }
 
@@ -63,9 +76,12 @@ class StagiaireController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //======= first way
         $stagiaire = stagiaire::find($id);
         $input = $request->all();
         $stagiaire->update($input);
+
+        
         return redirect('/stagiaires')->with('flash message','stagiaire updated');
     }
 
@@ -74,8 +90,16 @@ class StagiaireController extends Controller
      */
     public function destroy(string $id)
     {
+        //========== method one
         $stagiaire = Stagiaire::destroy($id);
         return redirect('/stagiaires')->with('flash message','stagiaire deleted');
+
+        //========= method two
+        $stagiaire = Stagiaire::find($id);
+        $stagiaire->delete();
+
+        //========= method three
+        $stagiaire = Stagiaire::where('id',$id)->delete();
     }
 
     public function deleteAll()

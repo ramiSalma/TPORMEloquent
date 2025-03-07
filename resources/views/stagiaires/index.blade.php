@@ -2,7 +2,9 @@
 @section('content')
   <div class="container">
        
-        {{$stagiaires->links()}}
+        {{--  {{$stagiaires->links()}}  --}}
+        <h1>totale stagiaires {{$total}}</h1>
+        <h1>moyenne age {{$moyAge}}</h1>
         <table class="table table-dark container">
             <tr>
                 <th>first name</th>

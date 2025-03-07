@@ -9,5 +9,7 @@ class Stagiaire extends Model
 {
     /** @use HasFactory<\Database\Factories\StagiaireFactory> */
     use HasFactory;
-    protected $fillable = ['nom', 'prenom', 'age', 'email', 'password'];
+    // protected $fillable = ['nom', 'prenom', 'age', 'email', 'password'];
+   protected $guarded = [];
+
 }
